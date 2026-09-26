@@ -1,14 +1,21 @@
-## Expected Behavior
+---
+name: Issue
+about: Creating an Issue
+title: " feature "
+labels: feature
+---
 
 
-## Actual Behavior
+## Features:
+- [ ]
+- [ ]
+- [ ]
 
+## Actual Behavior:
 
-## Steps to Reproduce the Problem
-
-  1.
-  1.
-  1.
+1.
+2.
+3.
 
 ## Specifications
 
