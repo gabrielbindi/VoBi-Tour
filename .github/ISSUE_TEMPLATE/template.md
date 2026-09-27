@@ -9,6 +9,8 @@ labels: feature
 
 As a developer I want to ...
 
+## Acceptance criteria:
+
 ## Features:
 - [ ]
 - [ ]
