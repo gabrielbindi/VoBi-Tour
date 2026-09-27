@@ -1,0 +1,7 @@
+{
+  "name": "VoBi-Tour",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
