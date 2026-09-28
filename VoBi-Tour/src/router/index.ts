@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import HomePage from '../views/HomePage.vue'
 import ButtonShowcase from '../views/ButtonShowcase.vue'
+import MapPage from '../views/MapPage.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -17,7 +18,12 @@ const routes: Array<RouteRecordRaw> = [
   path: '/buttons',
   name: 'Button',
   component: ButtonShowcase
-  }
+  },
+  {
+    path: '/map',
+    name: 'Map',
+    component: MapPage
+  },
 ]
 
 const router = createRouter({

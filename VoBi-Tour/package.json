@@ -20,11 +20,13 @@
     "@ionic/vue": "^9.0.0",
     "@ionic/vue-router": "^9.0.0",
     "ionicons": "^8.1.0",
+    "leaflet": "^1.9.4",
     "vue": "^3.5.0",
     "vue-router": "^5.0.0"
   },
   "devDependencies": {
     "@capacitor/cli": "8.5.2",
+    "@types/leaflet": "^1.9.22",
     "@vitejs/plugin-legacy": "^8.0.0",
     "@vitejs/plugin-vue": "^6.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",
