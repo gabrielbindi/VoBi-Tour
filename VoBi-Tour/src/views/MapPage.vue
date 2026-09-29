@@ -35,7 +35,8 @@ function starteKarte() {
     zeigeSichtbarenBereich();
   });
 
-  setzeTestMarker();
+  mittelPunktGraz();
+  setzeAlleHaltestellen();
 }
 
 function raeumeKarteAuf() {
@@ -66,7 +67,7 @@ function zeigeSichtbarenBereich() {
 }
 
 
-function setzeTestMarker() {
+function mittelPunktGraz() {
   if (map === null) {
     return;
   }
@@ -77,6 +78,43 @@ function setzeTestMarker() {
     fillColor: 'black',
     fillOpacity: 1
   }).addTo(map);
+}
+
+
+const haltestellen = [
+  { name: 'Jakominiplatz', lat: 47.07411100179385, lng: 15.435169539219155, verspaetung: 0 },
+  { name: 'Hauptbahnhof', lat: 47.07265379212712, lng: 15.417991821120031, verspaetung: 3 },
+  { name: 'Bulme', lat: 47.09375734863401, lng: 15.4060121295194, verspaetung: 8 }
+];
+
+function ermittleFarbe(verspaetung: number) {
+  if (verspaetung < 2) {
+    return 'green';
+  }
+
+  if (verspaetung < 5) {
+    return 'yellow';
+  }
+
+  return 'red';
+}
+
+function setzeAlleHaltestellen() {
+  if (map === null) {
+    return;
+  }
+
+  for (let i = 0; i < haltestellen.length; i++) {
+    const haltestelle = haltestellen[i];
+    const farbe = ermittleFarbe(haltestelle.verspaetung);
+
+    L.circleMarker([haltestelle.lat, haltestelle.lng], {
+      radius: 8,
+      color: farbe,
+      fillColor: farbe,
+      fillOpacity: 1
+    }).addTo(map);
+  }
 }
 </script>
 
