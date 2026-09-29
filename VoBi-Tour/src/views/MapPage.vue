@@ -30,6 +30,10 @@ function starteKarte() {
       map.invalidateSize();
     }
   }, 300);
+
+  map.on('moveend', function () {
+    zeigeSichtbarenBereich();
+  });
 }
 
 function raeumeKarteAuf() {
@@ -45,6 +49,19 @@ onMounted(function () {
 onBeforeUnmount(function () {
   raeumeKarteAuf();
 });
+
+function zeigeSichtbarenBereich() {
+  if (map === null) {
+    return;
+  }
+
+  const bounds = map.getBounds();
+  const suedwest = bounds.getSouthWest();
+  const nordost = bounds.getNorthEast();
+
+  console.log('Südwest:', suedwest.lat, suedwest.lng);
+  console.log('Nordost:', nordost.lat, nordost.lng);
+}
 </script>
 
 <style scoped>
