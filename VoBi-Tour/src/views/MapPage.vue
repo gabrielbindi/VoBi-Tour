@@ -34,6 +34,8 @@ function starteKarte() {
   map.on('moveend', function () {
     zeigeSichtbarenBereich();
   });
+
+  setzeTestMarker();
 }
 
 function raeumeKarteAuf() {
@@ -61,6 +63,20 @@ function zeigeSichtbarenBereich() {
 
   console.log('Südwest:', suedwest.lat, suedwest.lng);
   console.log('Nordost:', nordost.lat, nordost.lng);
+}
+
+
+function setzeTestMarker() {
+  if (map === null) {
+    return;
+  }
+
+  L.circleMarker([47.0707, 15.4395], {
+    radius: 8,
+    color: 'red',
+    fillColor: 'black',
+    fillOpacity: 1
+  }).addTo(map);
 }
 </script>
 
