@@ -8,6 +8,21 @@
 
     <ion-content>
       <div id="map"></div>
+
+      <div id="legende">
+        <div class="legende-eintrag">
+          <span class="legende-punkt" style="background-color: green;"></span>
+          <span>Keine Verspätung</span>
+        </div>
+        <div class="legende-eintrag">
+          <span class="legende-punkt" style="background-color: yellow;"></span>
+          <span>Leichte Verspätung</span>
+        </div>
+        <div class="legende-eintrag">
+          <span class="legende-punkt" style="background-color: red;"></span>
+          <span>Starke Verspätung</span>
+        </div>
+      </div>
     </ion-content>
   </ion-page>
 </template>
@@ -122,5 +137,31 @@ function setzeAlleHaltestellen() {
 #map {
   height: 100%;
   width: 100%;
+}
+
+#legende {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  background-color: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.legende-eintrag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+  color: #000;
+}
+
+.legende-punkt {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
 }
 </style>
