@@ -54,6 +54,10 @@ function starteKarte() {
 
   mittelPunktGraz();
   setzeAlleHaltestellen();
+
+  pollingId = setInterval(function () {
+    aktualisiereHaltestellen();
+  }, 10000);
 }
 
 function raeumeKarteAuf() {
