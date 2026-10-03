@@ -212,6 +212,20 @@ async function ladeHaltestellenVonOverpass() {
 
   setzeAlleHaltestellen();
 }
+
+async function ladeVerkehrFuerPunkt(punkt: { lat: number; lng: number }) {
+  const url = 'https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json?key=' + tomtomKey + '&point=' + punkt.lat + ',' + punkt.lng;
+
+  try {
+    const antwort = await fetch(url);
+    const daten = await antwort.json();
+
+    return daten.flowSegmentData;
+  } catch (fehler) {
+    console.error('Fehler beim Laden des Verkehrsflusses:', fehler);
+    return null;
+  }
+}
 </script>
 
 <style scoped>
