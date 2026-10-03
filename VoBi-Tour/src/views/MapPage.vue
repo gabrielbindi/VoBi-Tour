@@ -30,6 +30,7 @@
 <script setup lang="ts">
 import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/vue';
 import { onMounted, onBeforeUnmount } from 'vue';
+import { onIonViewWillEnter, onIonViewWillLeave } from '@ionic/vue';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
