@@ -68,6 +68,7 @@ function starteKarte() {
   ladeHaltestellenVonOverpass();
 
   starteNurPolling();
+  zeigeVerkehrsLage();
 }
 
 function raeumeKarteAuf() {
@@ -186,7 +187,7 @@ onIonViewWillEnter(function () {
 
 async function ladeHaltestellenVonOverpass() {
   const abfrage = '[out:json];node["public_transport"="platform"](47.02,15.30,47.12,15.55);out;';
-  const url = 'https://maps.mail.ru/osm/tools/overpass/api/interpreter';
+  const url = 'https://overpass-api.de/api/interpreter';
 
   const antwort = await fetch(url, {
     method: 'POST',

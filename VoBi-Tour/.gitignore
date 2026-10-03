@@ -32,3 +32,4 @@ npm-debug.log*
 /www
 .vscode/extensions.json
 TomTom.env
+.env
