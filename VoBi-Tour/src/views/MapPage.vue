@@ -57,9 +57,7 @@ function starteKarte() {
   mittelPunktGraz();
   setzeAlleHaltestellen();
 
-  pollingId = setInterval(function () {
-    aktualisiereHaltestellen();
-  }, poll_intervall * 1000);
+  starteNurPolling();
 }
 
 function raeumeKarteAuf() {
@@ -157,6 +155,29 @@ function aktualisiereHaltestellen() {
   entferneAlleMarker();
   setzeAlleHaltestellen();
 }
+
+function stoppePolling() {
+  if (pollingId !== null) {
+    clearInterval(pollingId);
+    pollingId = null;
+  }
+}
+
+function starteNurPolling() {
+  stoppePolling();
+
+  pollingId = setInterval(function () {
+    aktualisiereHaltestellen();
+  }, poll_intervall * 1000);
+}
+
+onIonViewWillLeave(function () {
+  stoppePolling();
+});
+
+onIonViewWillEnter(function () {
+  starteNurPolling();
+});
 </script>
 
 <style scoped>
