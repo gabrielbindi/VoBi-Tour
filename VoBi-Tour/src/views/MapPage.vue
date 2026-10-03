@@ -36,6 +36,7 @@ import 'leaflet/dist/leaflet.css';
 let map = null;
 let pollingId: number | null = null;
 let markerListe: L.CircleMarker[] = [];
+let poll_intervall: number = 10;
 
 function starteKarte() {
   map = L.map('map').setView([47.0707, 15.4395], 13);
@@ -57,7 +58,7 @@ function starteKarte() {
 
   pollingId = setInterval(function () {
     aktualisiereHaltestellen();
-  }, 10000);
+  }, poll_intervall * 1000);
 }
 
 function raeumeKarteAuf() {
