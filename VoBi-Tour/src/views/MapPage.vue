@@ -34,6 +34,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 let map = null;
+let pollingId: number | null = null;
 
 function starteKarte() {
   map = L.map('map').setView([47.0707, 15.4395], 13);
@@ -90,7 +91,7 @@ function mittelPunktGraz() {
   L.circleMarker([47.0707, 15.4395], {
     radius: 8,
     color: 'red',
-    fillColor: 'black',
+    fillColor: 'green',
     fillOpacity: 1
   }).addTo(map);
 }
