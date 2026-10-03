@@ -226,6 +226,20 @@ async function ladeVerkehrFuerPunkt(punkt: { lat: number; lng: number }) {
     return null;
   }
 }
+
+function ermittleVerkehrsFarbe(currentSpeed: number, freeFlowSpeed: number) {
+  const verhaeltnis = currentSpeed / freeFlowSpeed;
+
+  if (verhaeltnis > 0.7) {
+    return 'green';
+  }
+
+  if (verhaeltnis > 0.4) {
+    return 'yellow';
+  }
+
+  return 'red';
+}
 </script>
 
 <style scoped>
