@@ -142,6 +142,15 @@ function entferneAlleMarker() {
   }
   markerListe = [];
 }
+
+function aktualisiereHaltestellen() {
+  for (let i = 0; i < haltestellen.length; i++) {
+    haltestellen[i].verspaetung = Math.floor(Math.random() * 10);
+  }
+
+  entferneAlleMarker();
+  setzeAlleHaltestellen();
+}
 </script>
 
 <style scoped>
