@@ -40,6 +40,14 @@ let markerListe: L.CircleMarker[] = [];
 let poll_intervall: number = 10;
 
 let haltestellen: { name: string; lat: number; lng: number; verspaetung: number }[] = [];
+const tomtomKey = import.meta.env.VITE_TOMTOM_KEY;
+
+const verkehrsPunkte = [
+  { lat: 47.0714, lng: 15.4165 },
+  { lat: 47.0790, lng: 15.4120 },
+  { lat: 47.0860, lng: 15.4090 },
+  { lat: 47.0937, lng: 15.4060 }
+];
 
 function starteKarte() {
   map = L.map('map').setView([47.0707, 15.4395], 13);
