@@ -35,6 +35,7 @@ import 'leaflet/dist/leaflet.css';
 
 let map = null;
 let pollingId: number | null = null;
+let markerListe: L.CircleMarker[] = [];
 
 function starteKarte() {
   map = L.map('map').setView([47.0707, 15.4395], 13);
@@ -124,12 +125,14 @@ function setzeAlleHaltestellen() {
     const haltestelle = haltestellen[i];
     const farbe = ermittleFarbe(haltestelle.verspaetung);
 
-    L.circleMarker([haltestelle.lat, haltestelle.lng], {
+    const marker = L.circleMarker([haltestelle.lat, haltestelle.lng], {
       radius: 8,
       color: farbe,
       fillColor: farbe,
       fillOpacity: 1
     }).addTo(map);
+
+    markerListe.push(marker);
   }
 }
 </script>
