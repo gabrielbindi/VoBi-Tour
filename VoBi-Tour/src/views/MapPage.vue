@@ -240,6 +240,38 @@ function ermittleVerkehrsFarbe(currentSpeed: number, freeFlowSpeed: number) {
 
   return 'red';
 }
+
+let verkehrsLinien: L.Polyline[] = [];
+
+async function zeigeVerkehrsLage() {
+  if (map === null) {
+    return;
+  }
+
+  for (let i = 0; i < verkehrsPunkte.length; i++) {
+    const daten = await ladeVerkehrFuerPunkt(verkehrsPunkte[i]);
+
+    if (daten === null) {
+      continue;
+    }
+
+    const farbe = ermittleVerkehrsFarbe(daten.currentSpeed, daten.freeFlowSpeed);
+
+    const linienPunkte: [number, number][] = [];
+
+    for (let j = 0; j < daten.coordinates.coordinate.length; j++) {
+      const koordinate = daten.coordinates.coordinate[j];
+      linienPunkte.push([koordinate.latitude, koordinate.longitude]);
+    }
+
+    const linie = L.polyline(linienPunkte, {
+      color: farbe,
+      weight: 5
+    }).addTo(map);
+
+    verkehrsLinien.push(linie);
+  }
+}
 </script>
 
 <style scoped>
