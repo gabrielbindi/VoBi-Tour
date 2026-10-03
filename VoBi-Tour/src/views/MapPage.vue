@@ -61,6 +61,8 @@ function starteKarte() {
 }
 
 function raeumeKarteAuf() {
+  stoppePolling();
+  
   if (map !== null) {
     map.remove();
   }
