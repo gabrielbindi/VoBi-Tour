@@ -39,6 +39,8 @@ let pollingId: number | null = null;
 let markerListe: L.CircleMarker[] = [];
 let poll_intervall: number = 10;
 
+let haltestellen: { name: string; lat: number; lng: number; verspaetung: number }[] = [];
+
 function starteKarte() {
   map = L.map('map').setView([47.0707, 15.4395], 13);
 
@@ -55,14 +57,14 @@ function starteKarte() {
   });
 
   mittelPunktGraz();
-  setzeAlleHaltestellen();
+  ladeHaltestellenVonOverpass();
 
   starteNurPolling();
 }
 
 function raeumeKarteAuf() {
   stoppePolling();
-  
+
   if (map !== null) {
     map.remove();
   }
@@ -102,13 +104,6 @@ function mittelPunktGraz() {
     fillOpacity: 1
   }).addTo(map);
 }
-
-
-const haltestellen = [
-  { name: 'Jakominiplatz', lat: 47.07411100179385, lng: 15.435169539219155, verspaetung: 0 },
-  { name: 'Hauptbahnhof', lat: 47.07265379212712, lng: 15.417991821120031, verspaetung: 3 },
-  { name: 'Bulme', lat: 47.09375734863401, lng: 15.4060121295194, verspaetung: 8 }
-];
 
 function ermittleFarbe(verspaetung: number) {
   if (verspaetung < 2) {
@@ -180,6 +175,35 @@ onIonViewWillLeave(function () {
 onIonViewWillEnter(function () {
   starteNurPolling();
 });
+
+async function ladeHaltestellenVonOverpass() {
+  const abfrage = '[out:json];node["public_transport"="platform"](47.02,15.30,47.12,15.55);out;';
+  const url = 'https://maps.mail.ru/osm/tools/overpass/api/interpreter';
+
+  const antwort = await fetch(url, {
+    method: 'POST',
+    body: 'data=' + encodeURIComponent(abfrage)
+  });
+
+  const daten = await antwort.json();
+
+  haltestellen = [];
+
+  for (let i = 0; i < daten.elements.length; i++) {
+    const punkt = daten.elements[i];
+
+    if (punkt.tags && punkt.tags.name) {
+      haltestellen.push({
+        name: punkt.tags.name,
+        lat: punkt.lat,
+        lng: punkt.lon,
+        verspaetung: 0
+      });
+    }
+  }
+
+  setzeAlleHaltestellen();
+}
 </script>
 
 <style scoped>
