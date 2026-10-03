@@ -135,6 +135,13 @@ function setzeAlleHaltestellen() {
     markerListe.push(marker);
   }
 }
+
+function entferneAlleMarker() {
+  for (let i = 0; i < markerListe.length; i++) {
+    markerListe[i].remove();
+  }
+  markerListe = [];
+}
 </script>
 
 <style scoped>
