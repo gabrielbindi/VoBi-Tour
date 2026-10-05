@@ -4,7 +4,7 @@ project(trafficmapperQt VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Quick Positioning Location)
+find_package(Qt6 REQUIRED COMPONENTS Quick Positioning Location Network)
 
 qt_standard_project_setup(REQUIRES 6.10)
 
@@ -15,12 +15,16 @@ endif()
 
 qt_add_executable(apptrafficmapperQt
     main.cpp
+    trafficfetcher.cpp
+    trafficfetcher.h
 )
 
 qt_add_qml_module(apptrafficmapperQt
     URI trafficmapperQt
     QML_FILES
         Main.qml
+        SOURCES trafficfetcher.h
+        SOURCES trafficfetcher.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -38,6 +42,7 @@ target_link_libraries(apptrafficmapperQt
     PRIVATE Qt6::Quick
     PRIVATE Qt6::Positioning
     PRIVATE Qt6::Location
+    PRIVATE Qt6::Network
 )
 
 install(TARGETS apptrafficmapperQt

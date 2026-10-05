@@ -6,8 +6,8 @@ import QtPositioning
 
 ApplicationWindow{
     visible: true
-    width: showFullScreen()
-    height: showFullScreen()
+    width: 800
+    height: 600
     title: "map"
 
     Plugin {

@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include "trafficfetcher.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,6 +13,8 @@ int main(int argc, char *argv[])
         &app,
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
+    TrafficFetcher fetcher;
+    fetcher.fetchSegment(47.0707, 15.4395);
     engine.loadFromModule("trafficmapperQt", "Main");
 
     return QGuiApplication::exec();
