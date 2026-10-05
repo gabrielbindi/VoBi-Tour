@@ -28,10 +28,18 @@ ApplicationWindow{
         map.zoomLevel: 15
 
         MapPolyline {
-            parent: view_map
+            parent: view.map
             line.width: 5
             line.color: "red"
             path: trafficFetcher.coordinates
         }
     }
+
+    Text {
+         anchors.top: parent.top
+         anchors.left: parent.left
+         color: "black"
+         font.pixelSize: 20
+         text: "Speed: " + trafficFetcher.currentSpeed + " | Coords: " + trafficFetcher.coordinates.length
+     }
 }
