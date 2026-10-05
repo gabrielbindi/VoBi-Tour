@@ -15,16 +15,15 @@ endif()
 
 qt_add_executable(apptrafficmapperQt
     main.cpp
-    trafficfetcher.cpp
-    trafficfetcher.h
 )
 
 qt_add_qml_module(apptrafficmapperQt
     URI trafficmapperQt
     QML_FILES
         Main.qml
-        SOURCES trafficfetcher.h
-        SOURCES trafficfetcher.cpp
+    SOURCES
+        trafficfetcher.cpp
+        trafficfetcher.h
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

@@ -2,6 +2,7 @@
 #include <QNetworkReply>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <QUrl>
 #include <QUrlQuery>
 #include <QDebug>
@@ -26,6 +27,7 @@ void TrafficFetcher::fetchSegment(double lat, double lon)
 
 void TrafficFetcher::onReplyFinished()
 {
+
     auto *reply = qobject_cast<QNetworkReply*>(sender());
     if (!reply) return;
     reply->deleteLater(); // wichtig: Reply-Objekt muss manuell aufgeräumt werden
@@ -38,8 +40,18 @@ void TrafficFetcher::onReplyFinished()
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
     QJsonObject flowData = doc.object()["flowSegmentData"].toObject();
 
-    double currentSpeed = flowData["currentSpeed"].toDouble();
-    double freeFlowSpeed = flowData["freeFlowSpeed"].toDouble();
+    m_currentSpeed = flowData["currentSpeed"].toDouble();
+    m_freeFlowSpeed  = flowData["freeFlowSpeed"].toDouble();
 
-    qDebug() << "currentSpeed:" << currentSpeed << "freeFlowSpeed:" << freeFlowSpeed;
+    m_coordinates.clear();
+
+    const QJsonArray coordArray = flowData["coordinates"].toObject()["coordinate"].toArray();
+    for (const QJsonValue &v : coordArray) {
+        QJsonObject point = v.toObject();
+        m_coordinates.append(QVariant::fromValue(
+            QGeoCoordinate(point["latitude"].toDouble(), point["longitude"].toDouble())
+            ));
+    }
+
+    emit dataChanged();
 }
