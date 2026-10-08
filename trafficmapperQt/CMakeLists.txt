@@ -22,10 +22,9 @@ qt_add_qml_module(apptrafficmapperQt
     QML_FILES
         Main.qml
     SOURCES
-        trafficfetcher.cpp
-        trafficfetcher.h
-        SOURCES monitoredpoints.h
-        SOURCES trafficmodel.h
+        monitoredpoints.h
+        trafficmodel.h
+        trafficmodel.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

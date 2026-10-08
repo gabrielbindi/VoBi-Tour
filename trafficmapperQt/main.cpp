@@ -1,6 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "trafficfetcher.h"
+#include "trafficmodel.h"
 
 int main(int argc, char *argv[])
 {

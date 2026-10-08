@@ -15,45 +15,34 @@ ApplicationWindow{
         name: "osm"
     }
 
-    TrafficFetcher {
-        id: fetcher1
-        Component.onCompleted: fetchSegment(47.0707, 15.4395)
-    }
-
-    TrafficFetcher {
-        id: fetcher2
-        Component.onCompleted: fetchSegment(47.0650, 15.4395)
-    }
-
-    TrafficFetcher {
-        id: fetcher3
-        Component.onCompleted: fetchSegment(47.0750, 15.4420)
-    }
-
-    MapView {
-        id: view
-        anchors.fill: parent
-        map.plugin: osmPlugin
-        map.center: QtPositioning.coordinate(47.07083, 15.43861) //Graz
-        map.zoomLevel: 14
-
-        MapPolyline { parent: view.map; line.width: 5; line.color: "red"; path: fetcher1.coordinates }
-        MapPolyline { parent: view.map; line.width: 5; line.color: "blue"; path: fetcher2.coordinates }
-        MapPolyline { parent: view.map; line.width: 5; line.color: "green"; path: fetcher3.coordinates }
-
-        MapPolyline {
-            parent: view.map
-            line.width: 5
-            line.color: "red"
-            path: trafficFetcher.coordinates
+    TrafficModel {
+            id: trafficModel
+            Component.onCompleted: refresh()
         }
-    }
+
+        MapView {
+            id: view
+            anchors.fill: parent
+            map.plugin: osmPlugin
+            map.center: QtPositioning.coordinate(47.0707, 15.4395)
+            map.zoomLevel: 14
+
+            MapItemView {
+                parent: view.map
+                model: trafficModel
+                delegate: MapPolyline {
+                    line.width: 5
+                    line.color: speedRatio > 0.8 ? "green" : (speedRatio > 0.5 ? "yellow" : "red")
+                    path: model.path
+                }
+            }
+        }
 
     Text {
          anchors.top: parent.top
          anchors.left: parent.left
          color: "black"
          font.pixelSize: 20
-         text: "Speed: " + trafficFetcher.currentSpeed + " | Coords: " + trafficFetcher.coordinates.length
-     }
+         text: "Segments: " + trafficModel.rowCount()
+    }
 }
