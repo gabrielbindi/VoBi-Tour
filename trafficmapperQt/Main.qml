@@ -43,6 +43,13 @@ ApplicationWindow{
                     path: model.path
                 }
             }
+
+            TapHandler {
+                onTapped: (eventPoint) => {
+                    const coord = view.map.toCoordinate(eventPoint.position)
+                    trafficModel.addPoint(coord.latitude, coord.longitude)
+                }
+            }
         }
 
     Text {

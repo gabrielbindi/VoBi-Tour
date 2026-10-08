@@ -23,10 +23,12 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE void refresh();
+    Q_INVOKABLE void addPoint(double lat, double lon);
 
 private:
     struct SegmentData {
         QString name;
+        QGeoCoordinate coordinate;
         QVariantList path;
         double speedRatio = 1.0;
     };

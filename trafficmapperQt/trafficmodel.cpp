@@ -11,9 +11,12 @@ TrafficModel::TrafficModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_manager(new QNetworkAccessManager(this))
 {
-    m_segments.resize(monitoredPoints.size());
-    for (int i = 0; i < monitoredPoints.size(); ++i)
-        m_segments[i].name = monitoredPoints[i].name;
+    for (const auto &p : monitoredPoints) {
+        SegmentData seg;
+        seg.name = p.name;
+        seg.coordinate = p.coordinate;
+        m_segments.append(seg);
+    }
 }
 
 int TrafficModel::rowCount(const QModelIndex &parent) const
@@ -53,10 +56,10 @@ void TrafficModel::refresh()
 
 void TrafficModel::fetchPoint(int idx)
 {
-    const auto &point = monitoredPoints[idx];
+    const auto &coord = m_segments[idx].coordinate;
     QUrl url("https://api.tomtom.com/traffic/services/4/flowSegmentData/absolute/10/json");
     QUrlQuery query;
-    query.addQueryItem("point", QString("%1,%2").arg(point.coordinate.latitude()).arg(point.coordinate.longitude()));
+    query.addQueryItem("point", QString("%1,%2").arg(coord.latitude()).arg(coord.longitude()));
     query.addQueryItem("key", m_apiKey);
     url.setQuery(query);
 
@@ -64,7 +67,7 @@ void TrafficModel::fetchPoint(int idx)
     connect(reply, &QNetworkReply::finished, this, [this, reply, idx]() {
         reply->deleteLater();
         if (reply->error() != QNetworkReply::NoError) {
-            qWarning() << "Network error for" << monitoredPoints[idx].name << ":" << reply->errorString();
+            qWarning() << "Network error for" << m_segments[idx].name << ":" << reply->errorString();
             return;
         }
 
@@ -88,4 +91,18 @@ void TrafficModel::fetchPoint(int idx)
         QModelIndex changedIndex = index(idx);
         emit dataChanged(changedIndex, changedIndex);
     });
+
+}
+
+void TrafficModel::addPoint(double lat, double lon)
+{
+    const int row = m_segments.size();
+    beginInsertRows(QModelIndex(), row, row);
+    SegmentData seg;
+    seg.name = QString("Punkt %1").arg(row + 1);
+    seg.coordinate = QGeoCoordinate(lat, lon);
+    m_segments.append(seg);
+    endInsertRows();
+
+    fetchPoint(row);
 }
