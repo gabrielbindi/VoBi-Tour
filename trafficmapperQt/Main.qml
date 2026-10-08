@@ -20,6 +20,13 @@ ApplicationWindow{
             Component.onCompleted: refresh()
         }
 
+    Timer {
+        interval: 60000   // 1 Minute
+        running: true
+        repeat: true
+        onTriggered: trafficModel.refresh()
+    }
+
         MapView {
             id: view
             anchors.fill: parent
