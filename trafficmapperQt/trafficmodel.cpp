@@ -6,6 +6,9 @@
 #include <QUrl>
 #include <QUrlQuery>
 #include <QDebug>
+#include <QElapsedTimer>
+#include <Qtimer>
+
 
 TrafficModel::TrafficModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -104,5 +107,10 @@ void TrafficModel::addPoint(double lat, double lon)
     m_segments.append(seg);
     endInsertRows();
 
+    QElapsedTimer t;
+    t.start();
+
     fetchPoint(row);
+
+    qDebug() << t.elapsed() << "ms";
 }
