@@ -28,3 +28,7 @@ As a developer I want to ...
   - Platform:
   - Subsystem:
   - Interfaces:
+
+### Reviewed
+- [ ] Mario
+- [ ] Gabriel
