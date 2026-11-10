@@ -1,7 +1,3 @@
-# VobiTour – Git Issues (kompakt)
-
-Kleine, umsetzbare Issues aus den bisherigen Erkenntnissen.
-
 ## Architektur & Infrastruktur
 
 - **Server-Standort konfigurierbar**  
