@@ -70,7 +70,7 @@ Anwendungsfälle laut Titel: **Lieferung und Entsorgung** (Delivery and Disposal
 
 ## Mockup
 
-- Das Mockup besteht aus 5 Bildern
+- Das Mockup besteht aus 6 Bildern
 - Auf jedem Bild ist eine Seite unserer Applikation zu sehen
 
 
@@ -84,3 +84,5 @@ Anwendungsfälle laut Titel: **Lieferung und Entsorgung** (Delivery and Disposal
           Straßen welche nicht befahren werden können (z.B. Auto zu schwer) werden gemieden.
 
 - Bild 5: Fahreransicht bei der Fahrt. Wie bei Maps werden Abbiegungen und eine Linie zum Nachfahren gezeigt.
+
+- Bild 6: Das ist die Disponentensicht, dazu gibt es Areale und Felder welche frablich getrennt sind und die Tour aufteilen.
