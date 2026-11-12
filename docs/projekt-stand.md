@@ -68,6 +68,19 @@ Anwendungsfälle laut Titel: **Lieferung und Entsorgung** (Delivery and Disposal
 
 ---
 
-## Ältere Stände
+## Mockup
 
-(noch keine)
+- Das Mockup besteht aus 5 Bildern
+- Auf jedem Bild ist eine Seite unserer Applikation zu sehen
+
+
+- Bild 1: Start der Tour mit Bestätigungsknopf. Route und Map(Graz) ist zu erkennen. Jede Station hat eine Nummer.
+  
+- Bild 2: Liste der eingegebenen/gescannten Stopps. Und Button für die Routenberechnung.
+
+- Bild 3: Lieferschein-Scan. Zu sehen sind 2 Buttons Neuversuch/Bestätigung um das Resultat des Scanns zu managen.
+
+- Bild 4: Fahrzeugprofil. Daten des Fahrzeuges müssen hier eingegeben werden. Kennzeichen, Höhe, Breite, Gewicht. 
+          Straßen welche nicht befahren werden können (z.B. Auto zu schwer) werden gemieden.
+
+- Bild 5: Fahreransicht bei der Fahrt. Wie bei Maps werden Abbiegungen und eine Linie zum Nachfahren gezeigt.
