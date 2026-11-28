@@ -11,3 +11,5 @@ CREATE TABLE route (
     duration_s     numeric(10,1) NOT NULL CHECK (duration_s >= 0),
     calculated_at  timestamptz NOT NULL DEFAULT now()
 );
+
+CREATE UNIQUE INDEX route_one_active_per_tour ON route (tour_id) WHERE is_active;
