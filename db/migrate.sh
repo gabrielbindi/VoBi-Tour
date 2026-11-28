@@ -8,3 +8,7 @@ source .env
 
 # Start Database Container and wait for it to be ready
 docker compose up -d --wait
+
+psql() {
+    docker compose exec -T db psql -U "$POSTGRES_USER" -d "$POSTGRES_DB" -v ON_ERROR_STOP=1 "$@"
+}
