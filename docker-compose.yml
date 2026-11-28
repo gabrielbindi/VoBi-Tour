@@ -1,7 +1,7 @@
 # VobiTour – PostgreSQL + PostGIS + pgRouting
 # Start:  docker compose up -d
 # Shell:  docker compose exec db psql -U $POSTGRES_USER -d $POSTGRES_DB
-# Reset:  docker compose down -v   (löscht das Volume = leere DB)
+# Reset:  docker compose down -v   (delete Volume = leere DB)
 
 services:
   db:
