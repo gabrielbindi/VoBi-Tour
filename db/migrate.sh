@@ -5,3 +5,6 @@
 set -e
 cd "$(dirname "$0")/.."
 source .env
+
+# Start Database Container and wait for it to be ready
+docker compose up -d --wait
