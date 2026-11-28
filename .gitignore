@@ -1,1 +1,5 @@
 VoBi-Tour/node_modules/*
+.env
+pgdata/
+*.osm.pdf
+*.osm
