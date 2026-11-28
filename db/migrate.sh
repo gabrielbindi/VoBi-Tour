@@ -3,3 +3,4 @@
 # Start: ./db/migrate.sh
 
 set -e
+cd "$(dirname "$0")/.."
