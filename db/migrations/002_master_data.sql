@@ -19,7 +19,7 @@ CREATE TABLE account (
     username        text NOT NULL UNIQUE,
     password_hash   text NOT NULL,
     role            text NOT NULL CHECK (role IN ('driver', 'dispatcher', 'admin')),
-    crew_id         integer REFERENCES crew_member(id) ON DELETE SET NULL
+    crew_id         integer UNIQUE REFERENCES crew_member(id) ON DELETE SET NULL
 );
 
 -- vehicles
