@@ -37,3 +37,7 @@ CREATE INDEX idx_change_log_account_id    ON change_log (account_id);
 -- 005 Routing
 CREATE INDEX idx_route_tour_id            ON route (tour_id);
 CREATE INDEX idx_route_warning_route_id   ON route_warning (route_id);
+
+-- OSM-IDs
+CREATE INDEX idx_location_osm_section
+    ON location (way_osm_id, from_node_osm_id, to_node_osm_id);
