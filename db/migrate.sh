@@ -19,3 +19,18 @@ psql -c "CREATE TABLE IF NOT EXISTS schema_migrations (
     version text PRIMARY KEY,
     applied_at timestamp NOT NULL DEFAULT now()
     );"
+
+# All SQL files in the db/migrations directory
+for file in db/migrations/*.sql; do
+    name=$(basename "$file")
+    version=$(psql -tA -c "SELECT 1 FROM schema_migrations WHERE version = '$name';")
+    if [ "$version" = "1" ]; then
+        echo "Skipping migration $name (already applied)"
+    else
+        echo "Applying migration $name"
+        psql -1 -f "/db/migrations/$name" \
+            -c "INSERT INTO schema_migrations (version) VALUES ('$name');"
+    fi
+done
+
+echo "Migration completed successfully."
