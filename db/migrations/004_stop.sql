@@ -33,7 +33,8 @@ CREATE TABLE stop_crew (
 
     CHECK (originally_assigned_to <> crew_id),
     CHECK (finished_at >= arrived_at),
-    CHECK (finished_at IS NULL OR arrived_at IS NOT NULL)
+    CHECK (finished_at IS NULL OR arrived_at IS NOT NULL),
+    CHECK (arrived_at IS NOT NULL OR originally_assigned_to IS NOT NULL)
 );
 
 -- Problem
