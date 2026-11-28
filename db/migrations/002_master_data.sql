@@ -1,7 +1,7 @@
--- 001 init.sql
--- creates Tables
-
-CREATE EXTENSION IF NOT EXISTS postgis;
+-- 002 master_data.sql
+-- Domain model for cargo_type
+CREATE DOMAIN cargo_type AS text
+    CHECK (VALUE IN ('paper', 'residual_waste', 'packaging', 'parcel', 'passenger'));
 
 -- Crew-members
 
