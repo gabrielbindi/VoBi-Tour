@@ -29,3 +29,19 @@ CREATE TABLE route_warning (
 
     CHECK (num_nulls(osm_way_id, from_node_osm_id, to_node_osm_id) IN (0, 3))
 );
+
+-- Street-Attribute
+CREATE TABLE street_attribute (
+    osm_way_id        bigint NOT NULL,
+    from_node_osm_id  bigint NOT NULL,
+    to_node_osm_id    bigint NOT NULL,
+    max_height        numeric(4,2) CHECK (max_height > 0),   -- m
+    max_width         numeric(4,2) CHECK (max_width  > 0),   -- m
+    max_weight        numeric(5,2) CHECK (max_weight > 0),   -- t
+    width             numeric(5,2) CHECK (width      > 0),   -- m
+    lanes             integer      CHECK (lanes      > 0),
+    access            text,
+    passes_under      boolean,
+
+    PRIMARY KEY (osm_way_id, from_node_osm_id, to_node_osm_id)
+);
